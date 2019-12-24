@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangyaoxing.mapper.ManthMapper">
+	<insert id="addManth">
+		INSERT INTO manth (cardno,created,jd,wd) VALUES 
+		<foreach collection="manths" item="l" separator=",">
+			(#{l.cardno},#{l.created},#{l.jd},#{l.wd})
+		</foreach>
+	</insert>
+	
+	<select id="selectManth" resultType="com.zhangyaoxing.entity.Manth">
+		SELECT * FROM manth
+	</select>
+	
+	<select id="selectManths" resultType="com.zhangyaoxing.entity.Manth">
+		SELECT * FROM manth
+		<where>
+			<if test="null!=id">
+				id in (#{id})
+			</if>
+		</where>
+	</select>
+</mapper>
